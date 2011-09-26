@@ -41,7 +41,7 @@ class win:
     vbox.pack_start(mb, False, False, 0)
     vbox.show_all()
 
-    self.splits = "!;!" # What the words are seperated by in the dictionary. If you wanna use csv files, just change to ",".
+    self.splits = "!;!" # What the words are separated by in the dictionary. If you wanna use csv files, just change to ",".
 
     self.attr = pango.AttrList()
     size = pango.AttrSize(20000, 0, -1)
@@ -74,7 +74,7 @@ class win:
     self.guess = gtk.Entry() # The entry to guess the answer
     self.vbox = gtk.VBox()
     self.hbox = gtk.HBox()
-    between = gtk.HSeparator()
+    between = gtk.VSeparator()
     between.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
     self.hbox.pack_start(self.guess)
     self.hbox.pack_start(between,padding=10)
@@ -89,6 +89,9 @@ class win:
 
     self.showbutt.connect("clicked", self.showanswer)
 
+    self.between_cb_word = gtk.HSeparator()
+    self.between_cb_word.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
+
     self.contentvbox = gtk.VBox()
     self.selecthbox = gtk.HBox()
 
@@ -102,12 +105,13 @@ class win:
     self.label = gtk.Label("")
     fixed.put(self.label,0,0)
 
-    self.selecthbox.pack_start(fixed) # The widget that holds the combobox
+    self.selecthbox.pack_start(fixed) 
 
     self.contentvbox.pack_start(self.selecthbox)
 
     self.contentvbox.show_all()
     self.contentvbox.set_border_width(10)
+    self.contentvbox.pack_start(self.between_cb_word,padding=10)
     self.contentvbox.pack_start(self.vbox)
 
 
