@@ -61,7 +61,6 @@ class win:
       self.cb.append_text(d[1])
 
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-    #self.window.set_border_width(10)
     self.window.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
 
     self.window.connect("destroy", lambda w: gtk.main_quit())
@@ -80,7 +79,7 @@ class win:
     self.hbox.pack_start(self.guess)
     self.hbox.pack_start(between,padding=10)
     self.hbox.pack_start(self.nbutt)
-    #self.hbox.pack_start(image)
+
     self.vbox.pack_start(self.word)
     self.vbox.pack_start(self.hbox,padding=5)
     self.vbox.pack_start(self.showbutt)
@@ -90,7 +89,6 @@ class win:
 
     self.showbutt.connect("clicked", self.showanswer)
 
-    #self.mainvbox = gtk.VBox()
     self.contentvbox = gtk.VBox()
     self.selecthbox = gtk.HBox()
 
@@ -104,10 +102,8 @@ class win:
     self.label = gtk.Label("")
     fixed.put(self.label,0,0)
 
-    #self.selecthbox.pack_start(self.selectlabel)
     self.selecthbox.pack_start(fixed) # The widget that holds the combobox
 
-    #self.contentvbox.pack_start(vbox)
     self.contentvbox.pack_start(self.selecthbox)
 
     self.contentvbox.show_all()
@@ -135,7 +131,7 @@ class win:
     except IndexError:
       self.index = 0
       self.word.set_text(self.currentwords[self.index].capitalize())
-    #print self.index
+
     markup = "<span foreground='white'>"+ self.word.get_text() +"</span>"
     self.word.set_markup(markup)
     self.guess.set_text("")
@@ -153,7 +149,7 @@ class win:
     else: # Guess is not correct
       markup = "<span foreground='red'>Not correct!</span>"
       self.answerlabel.set_markup(markup)
-    #print guess.get_text().upper() + " : " + self.current[self.currentwords[self.index]].upper()
+
 
   def read_in_dict(self,fil): # Funtion to return a dictionary with all the words in a file, the first word is the key to the second for each line.
     f = open(fil)
@@ -176,12 +172,9 @@ class win:
   def on_changed(self,s): # A function that loads a new dictionary when a new dict is selected from the combobox, and randomly sorts a list of all the dict keys.
     self.index = 0
     self.current = self.select(self.parsed_dicts,self.cb.get_active_text())
-    #print "current:",
-    #print self.current
 
     self.currentwords = self.current.keys()
     random.shuffle(self.currentwords)
-    #print self.currentwords
     self.nextindex(0)
     self.contentvbox.show_all()
 
