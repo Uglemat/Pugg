@@ -20,12 +20,21 @@ import pygtk
 import gtk
 import random
 import pango
+from string import capitalize
 pygtk.require('2.0')
 
 class win:
   def __init__(self):
-    self.version = "0.1"
 
+    self.score = 0 # The score
+    self.guessed = 0
+    self.allowscore = 1 # Score will only increase if allowscore is 1, when you show the answer it becomes 0
+    self.reset_score_if_false_guess = 0
+
+    self.version = "0.2"
+
+##################################################################
+                      ## Menu Stuff ##
     mb = gtk.MenuBar()
 
     filemenu = gtk.Menu()
@@ -36,6 +45,26 @@ class win:
     filemenu.append(exit)
     mb.append(filem)
 
+    settingsmenu = gtk.Menu()
+    settingsm = gtk.MenuItem("Settings")
+    settingsm.set_submenu(settingsmenu)
+    setbackscore = gtk.MenuItem("Reset score")
+    falseguessreset = gtk.CheckMenuItem("False guess will reset score")
+    falseguessreset.connect("toggled", self.falsetoggle)
+    setbackscore.connect("activate", self.resetscore)
+    settingsmenu.append(setbackscore)
+    settingsmenu.append(falseguessreset)
+    mb.append(settingsm)
+
+    helpmenu = gtk.Menu()
+    helpm = gtk.MenuItem("Help")
+    helpm.set_submenu(helpmenu)
+    about = gtk.MenuItem("About")
+    about.connect("activate",self.aboutdialog)
+    helpmenu.append(about)
+    mb.append(helpm)
+                       ## Menu stuff end ##
+########################################################################
 
     vbox = gtk.VBox(False, 2)
     vbox.pack_start(mb, False, False, 0)
@@ -54,6 +83,7 @@ class win:
     for line in dicts:
       self.parsed_dicts.append(line[:-1].split(self.splits)) # Creates a list of all the .pugg files listed in dicts.pugg, and their title.
 
+    print self.parsed_dicts
     self.cb = gtk.combo_box_new_text()
     self.cb.connect("changed", self.on_changed)
 
@@ -61,7 +91,6 @@ class win:
       self.cb.append_text(d[1])
 
     self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-    self.window.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
 
     self.window.connect("destroy", lambda w: gtk.main_quit())
     self.word = gtk.Label()  # The label to hold the word to guess
@@ -71,11 +100,12 @@ class win:
     self.nbutt = gtk.Button(label="Next word")
     self.showbutt = gtk.Button(label="Show answer")
     self.answerlabel = gtk.Label(" ") # The label to show the answer, and to show wether the answer was correct
+    self.answerlabel.set_line_wrap(True)
+    self.answerlabel.set_size_request(300,50)
     self.guess = gtk.Entry() # The entry to guess the answer
     self.vbox = gtk.VBox()
     self.hbox = gtk.HBox()
     between = gtk.VSeparator()
-    between.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
     self.hbox.pack_start(self.guess)
     self.hbox.pack_start(between,padding=10)
     self.hbox.pack_start(self.nbutt)
@@ -90,12 +120,10 @@ class win:
     self.showbutt.connect("clicked", self.showanswer)
 
     self.between_cb_word = gtk.HSeparator()
-    self.between_cb_word.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color(16400, 16400, 16440))
 
     self.contentvbox = gtk.VBox()
     self.selecthbox = gtk.HBox()
-
-    markup = "<span foreground='white'>Select dictionary:  </span>"
+    markup = "<span>Select dictionary:  </span>"
     self.selectlabel = gtk.Label()
     self.selectlabel.set_markup(markup)
 
@@ -118,60 +146,55 @@ class win:
     vbox.pack_start(self.contentvbox)
     vbox.show()
 
+    self.statusbar = gtk.Statusbar()
+    self.statusbar.show()
+    self.statusbar.set_has_resize_grip(False)
+
+    self.statusbar.push(1,"Correct guesses in a row: " + str(self.score))
+
+    vbox.pack_start(self.statusbar,False,True,0)
+
     self.window.add(vbox)
     self.window.set_title("Pugg - "+ self.version)
 
     self.nbutt.connect("clicked", self.nextindex)
     self.guess.connect("activate", self.guessword)
 
-  def main(self):
-    gtk.main()
 
   def nextindex(self, next=1): # Function to chose the next word to guess, and make sure the program doesn't crash while doing it.
     if next:
-        self.index += 1
+      self.index += 1
     try:
       self.word.set_text(self.currentwords[self.index].capitalize())
     except IndexError:
       self.index = 0
       self.word.set_text(self.currentwords[self.index].capitalize())
 
-    markup = "<span foreground='white'>"+ self.word.get_text() +"</span>"
+    markup = "<span>"+ self.word.get_text() +"</span>"
     self.word.set_markup(markup)
     self.guess.set_text("")
     self.answerlabel.set_text(" ")
     self.showbutt.set_label("Show answer")
     self.showbutt.show()
     self.window.set_focus(self.guess)
+    if not self.guessed:
+      self.setscore(0)
+    self.allowscore = 1
+    self.guessed = 0
 
   def guessword(self,guess): # Does what you would expect
-    if guess.get_text().upper() == self.current[self.currentwords[self.index]].upper(): # Guess is correct
+    if guess.get_text().upper() in self.current[self.currentwords[self.index]]: # Guess is correct
       self.showbutt.hide()
-      markup = "<span foreground='green'>Correct!</span>"
+      markup = "<span foreground='darkgreen'>Correct!</span>"
       self.answerlabel.set_markup(markup)
       self.window.set_focus(self.nbutt)
+      self.setscore(1)
+      self.guessed = 1
     else: # Guess is not correct
       markup = "<span foreground='red'>Not correct!</span>"
       self.answerlabel.set_markup(markup)
-
-
-  def read_in_dict(self,fil): # Funtion to return a dictionary with all the words in a file, the first word is the key to the second for each line.
-    f = open(fil)
-    words = f.readlines()
-    f.close()
-    retlist = []
-    dic = {}
-    for line in words:
-      retlist.append(line[:-1].split(self.splits))
-    for i in retlist:
-      dic[i[0]] = i[1]
-    return dic
-
-
-  def select(self,pdics,wanted): # Function that return the requested dictionary, "wanted" is the dictionary title, which is defined in column two in dicts.pugg
-    for i in pdics:
-      if i[1] == wanted:
-        return self.read_in_dict(i[0])
+      if self.reset_score_if_false_guess:
+        self.setscore(0)
 
   def on_changed(self,s): # A function that loads a new dictionary when a new dict is selected from the combobox, and randomly sorts a list of all the dict keys.
     self.index = 0
@@ -184,15 +207,74 @@ class win:
 
   def showanswer(self,ob): # Does what you would expect
     if self.answerlabel.get_text() == " " or self.answerlabel.get_text() == "Not correct!":
-      self.answerlabel.set_text(self.current[self.currentwords[self.index]].capitalize())
+      text = "<span foreground=\"darkblue\"> or </span>".join(map(capitalize,self.current[self.currentwords[self.index]]))
+
+      self.answerlabel.set_text(text)
       self.showbutt.set_label("Hide answer")
       self.window.set_focus(self.nbutt)
+      self.setscore(0)
     else:
       self.answerlabel.set_text(" ")
       self.showbutt.set_label("Show answer")
-    markup = "<span foreground='white'>" + self.answerlabel.get_text() + "</span>"
+    markup = "<span>" + self.answerlabel.get_text() + "</span>"
     self.answerlabel.set_markup(markup)
 
+  def setscore(self,correct=0):
+    if correct and self.allowscore:
+      self.score += 1
+      self.allowscore = 0
+    else:
+      self.score = 0
+      self.allowscore = 0
+    self.statusbar.push(1,"Correct guesses in a row: " + str(self.score))
+
+  def resetscore(self,omg):
+    self.score = 0
+    self.statusbar.push(1,"Correct guesses in a row: " + str(self.score))
+
+  def falsetoggle(self,omg):
+    if omg.active:
+      self.reset_score_if_false_guess = 1
+    else:
+      self.reset_score_if_false_guess = 0
+
+  def read_in_dict(self,fil): # Funtion to return a dictionary with all the words in a file, the first word is the key to the second for each line.
+    f = open(fil)
+    words = f.readlines()
+    f.close()
+    retlist = []
+    dic = {}
+    for line in words:
+      uline = line.upper()
+      retlist.append(uline[:-1].split(self.splits))
+    for i in retlist:
+      try:
+        dic[i[0]] = i[1].split("!-!")
+      except IndexError:
+        print "Invalid line in dictionary, continuing without it."
+    return dic
+
+  def select(self,pdics,wanted): # Function that return the requested dictionary, "wanted" is the dictionary title, which is defined in column two in dicts.pugg
+    for i in pdics:
+      if i[1] == wanted:
+        return self.read_in_dict(i[0])
+
+  def aboutdialog(self, widget):
+    about = gtk.AboutDialog()
+    about.set_program_name("Putt")
+    about.set_version(self.version)
+    about.set_copyright("Copyright (c) 2011 Mattias Ugelvik <smartestviking@gmail.com>")
+    about.set_comments("Pugg is a tool to memorize words from other languages")
+    about.set_website("http://smartviking.github.com/Pugg/")
+    about.set_logo(gtk.AboutDialog().render_icon(gtk.STOCK_DIALOG_INFO,gtk.ICON_SIZE_DIALOG))
+    about.set_license(open("gpl.txt").read())
+    about.set_authors(["Mattias Ugelvik <smartestviking@gmail.com>"])
+    about.set_documenters(["Mattias Ugelvik <smartestviking@gmail.com>"])
+    about.run()
+    about.destroy()
+
+  def main(self):
+    gtk.main()
 
 if __name__ == "__main__":
   wind = win()

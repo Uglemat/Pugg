@@ -1,10 +1,8 @@
 This program is licensed under the GNU GPL.
 
-The two files in "dictfiles", "EN_NO.pugg" and "NO_EN.pugg" are not my work, the words were downloaded from the website https://wiki.familysearch.org/en/Norway_Word_List and later modified, those two textfiles are therefor licensed under the CC BY-SA 3.0 license, which can be found here: http://creativecommons.org/licenses/by-sa/3.0/us/ .
-
-
 You can make your own .pugg files for this program.
-The .pugg files are simple csv files, but instead of separating columns with a comma, I use "!;!" so the program doesn't get confused so easily.
+The .pugg files are almost like csv files, but instead of separating columns with a comma, I use "!;!" so the program doesn't get confused so easily, I seperate different answers with !-!. To understand how that works, take a look at the included dictionaries.
+
 
 To add your own file, you must tell the program by editing the "dicts.pugg" file, in column 1 you specify the location of the file, and in column 2, you specify the dictionary name.
 
