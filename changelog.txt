@@ -1,4 +1,12 @@
-	Putt v.0.2:
+	Putt v0.2.1:
+ - When you show answers, the answers will be seperated by ", ",
+    and the last two will be seperated by " or ".
+ - Couple of small bigs fixed.
+ - Small improvements in the dictionaries.
+ - Some tiny changes.
+
+
+	Putt v0.2:
  - Added score inside a statusbar
  - Changed widget bg colors to normal
  - Both included dictionaries are GREATLY improved

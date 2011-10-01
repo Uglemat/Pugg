@@ -21,7 +21,7 @@ import gtk
 import random
 import pango
 from string import capitalize
-pygtk.require('2.0')
+pygtk.require('2.1')
 
 class win:
   def __init__(self):
@@ -31,7 +31,7 @@ class win:
     self.allowscore = 1 # Score will only increase if allowscore is 1, when you show the answer it becomes 0
     self.reset_score_if_false_guess = 0
 
-    self.version = "0.2.1"
+    self.version = "0.2"
 
 ##################################################################
                       ## Menu Stuff ##
