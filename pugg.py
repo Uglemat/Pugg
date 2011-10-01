@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import cProfile
 """
     This program is called Pugg, and is used to learn new languages.
     Copyright (C) 2011  Mattias Ugelvik
@@ -83,7 +84,6 @@ class win:
     for line in dicts:
       self.parsed_dicts.append(line[:-1].split(self.splits)) # Creates a list of all the .pugg files listed in dicts.pugg, and their title.
 
-    print self.parsed_dicts
     self.cb = gtk.combo_box_new_text()
     self.cb.connect("changed", self.on_changed)
 
@@ -278,4 +278,4 @@ class win:
 
 if __name__ == "__main__":
   wind = win()
-  wind.main()
+  cProfile.run("wind.main()")
