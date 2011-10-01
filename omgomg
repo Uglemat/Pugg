@@ -1,0 +1,13 @@
+rect1_p1_x, rect1_p2_x, rect1_p1_y, rect1_p2_y = 1,2,3,4
+if rect1_p1_x > rect1_p2_x:
+    xMax1 = rect1_p1_x
+    xMin1 = rect1_p2_x
+elif rect1_p2_x > rect1_p1_x:
+    xMax1 = rect1_p2_x
+    xMin1 = rect1_p1_x   
+if rect1_p1_y > rect1_p2_y:
+    yMax1 = rect1_p1_y
+    yMin1 = rect1_p2_y
+elif rect1_p2_y > rect1_p1_y:
+    yMax1 = rect1_p2_y
+    yMin1 = rect1_p1_y

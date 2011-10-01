@@ -20,7 +20,7 @@ laborer!;!håndarbeider
 archive!;!arkiv!-!arkivere
 inheritance!;!arv
 asthma!;!astma
-that!;!at!-!den!-!den der!-!den som!-!denne!-!det!-!det der!-!dette!-!disse!-!for at!-!som!-!s� at
+that!;!at!-!den!-!den der!-!den som!-!denne!-!det!-!det der!-!dette!-!disse!-!som!-!for at
 eighteen!;!atten
 eighteenth!;!attende
 certificate!;!attest!-!attestere!-!sertifikat
@@ -43,7 +43,7 @@ prayer!;!bønn
 population!;!befolkning!-!folketall
 both!;!begge!-!både
 event!;!begivenhet!-!forhold!-!hendelse!-!innslag!-!øvelse
-funeral!;!begravelse!-!begravelses-
+funeral!;!begravelse
 handle!;!behandle!-!geværkolbe!-!hank!-!håndtak!-!håndtere
 leg!;!bein!-!ben!-!etappe!-!lår
 deny!;!avslå!-!benekte
@@ -59,7 +59,7 @@ impregnate!;!gjennomtrenge!-!impregnere!-!impregnert
 pay!;!betale!-!lønne seg
 beggar!;!tigger
 grant!;!bevilge!-!innrømme!-!innrømmelse!-!rabatt!-!skjenke!-!stipend
-proof!;!-fast!-!-sikker!-!bevis!-!korrektur!-!sikkerhet
+proof!;!fast!-!sikker!-!bevis!-!korrektur!-!sikkerhet
 library!;!bibliotek
 volume!;!bind!-!bok!-!emne!-!innhold!-!omfang!-!tema!-!volum
 biography!;!biografi
@@ -86,7 +86,7 @@ brewer!;!brygger
 wedding!;!bryllup
 town!;!by!-!forretningssentrum
 small!;!liten
-rural!;!bondsk!-!enkel!-!land-!-!landlig
+rural!;!bondsk!-!enkel!-!landlig
 lease!;!bygsel!-!bygsle!-!forpaktning!-!leiekontrakt!-!utleie
 abscess!;!byll!-!svulst
 plague!;!landeplage!-!pest
@@ -126,12 +126,12 @@ afternoon!;!ettermiddag
 surname!;!etternavn
 own!;!egen!-!eget!-!egne!-!eie!-!innrømme!-!personlig
 actual!;!egentlig!-!ekte!-!faktisk!-!heller!-!ja visst!-!nokså!-!riktig nok!-!sannelig!-!snarere!-!temmelig!-!virkelig
-property!;!besittelse!-!bo!-!bruk!-!egenskap!-!eiendeler!-!eiendom!-!formue!-!gods!-!g�rd!-!kvalitet!-!l�s�re!-!middel!-!rekvisitt
+property!;!besittelse!-!bo!-!bruk!-!egenskap!-!eiendeler!-!eiendom!-!formue!-!gods!-!gård!-!kvalitet!-!middel!-!rekvisitt
 legitimate!;!ektefødt!-!lovmessig
 spouse!;!ektefelle
 husband!;!ektemann
 married!;!gift
-marital!;!ekteskapelig!-!ekteskaps-
+marital!;!ekteskapelig
 student!;!elev!-!student
 or!;!eller
 eleven!;!elleve
@@ -145,7 +145,7 @@ England!;!England
 each!;!alle!-!alt!-!enhver!-!hver!-!hver enkelt
 widow!;!enke!-!gjøre til enke!-!gjøre til enkemann
 widower!;!enkemann
-widowed!;!enke-!-!enkemann-
+widowed!;!enke!-!enkemann
 yet!;!alt!-!dog!-!enda!-!ennå!-!fremdeles!-!likevel
 livelihood!;!levebrød!-!livsopphold
 acknowledge!;!anerkjenne!-!erkjenne mottakelsen av!-!innrømme!-!kvittere!-!takke
@@ -187,7 +187,7 @@ his!;!dens!-!deres!-!dets!-!hans!-!henne!-!hennes!-!sin!-!sine!-!sitt
 harbor!;!havn!-!havneby
 rather!;!ganske!-!ganske lite!-!heller!-!nokså!-!snarere
 holiday!;!ferie!-!fridag!-!helligdag
-her!;!dens!-!dets!-!hans!-!henne!-!hennes!-!hun!-!hunn-!-!sin!-!sine!-!sitt
+her!;!dens!-!dets!-!hans!-!henne!-!hennes!-!hun!-!sin!-!sine!-!sitt
 here!;!her!-!hit
 judicial!;!juridisk!-!lovlig!-!rettslig
 horse!;!hest
@@ -202,7 +202,7 @@ adultery!;!ekteskapsbrudd
 with!;!hos!-!med
 cough!;!hoste
 census!;!folketelling
-she!;!henne!-!hennes!-!hun!-!hunn-
+she!;!henne!-!hennes!-!hun
 house!;!hus!-!huse
 hussar!;!husar
 head!;!hode!-!hodeskalle!-!lede!-!stå øverst
@@ -298,7 +298,7 @@ Lutheran!;!lutheraner!-!lutheransk!-!protestant
 post!;!bokføre!-!embete!-!erverv!-!loddtrekning!-!post!-!poste!-!postere!-!stake!-!stang!-!stilling!-!stolpe
 apprentice!;!læregutt!-!lærling
 teacher!;!frøken!-!lærer
-serial!;!rekke-!-!serie
+serial!;!rekke!-!serie
 Saturday!;!lørdag
 loose!;!løs!-!slakk!-!slapp!-!vid
 diarrhea!;!diare!-!Diaré
@@ -363,19 +363,18 @@ conversion!;!forvandling
 uncle!;!onkel
 Wednesday!;!onsdag
 up!;!opp
-above!;!luft-!-!mer enn!-!oppe!-!ovenfor!-!ovenpå!-!over
+above!;!mer enn!-!oppe!-!ovenfor!-!ovenpå!-!over
 foster!;!foster!-!fostre opp!-!fremme
 record!;!metallplate!-!opptegnelse!-!plakett!-!plate!-!protokoll!-!register!-!rekord!-!skive!-!ta opp
 dictionary!;!ordbok!-!ordforråd!-!ordliste!-!vokabular
 us!;!oss!-!oss selv
-over!;!over!-!ublu
 transgression!;!overtredelse
 sword!;!sabel!-!sverd
 plot!;!jordstykke!-!komplott!-!planlegge
 pension!;!pensjon!-!pensjonat
 retired!;!pensjonert!-!tilbaketrukket
 person!;!person
-maiden!;!jomfru!-!pike-!-!ugift
+maiden!;!jomfru!-!pike!-!ugift
 Pentecost!;!pinse
 potter!;!keramiker!-!pottemaker
 preach!;!preke
@@ -438,10 +437,10 @@ cabinetmaker!;!møbelsnekker
 soldier!;!kriger!-!soldat!-!være soldat
 black!;!svart
 infant!;!lite barn!-!spedbarn
-social!;!omgjengelig!-!samfunns-!-!selskapelig!-!selskaps-!-!sosial
+social!;!omgjengelig!-!selskapelig!-!sosial
 stepchild!;!stebarn
 stepbrother!;!halvbror
-place!;!insette!-!installere!-!legge!-!lokalisere!-!plass!-!plassere!-!putte!-!sette!-!sted!-!stille!-!st�
+place!;!insette!-!installere!-!legge!-!lokalisere!-!plass!-!plassere!-!putte!-!sette!-!sted!-!stille
 stepdaughter!;!stedatter
 stepfather!;!stefar
 stepmother!;!stemor
@@ -469,7 +468,7 @@ siblings!;!søsken
 sister!;!søster
 saw!;!sag!-!sage
 such!;!slik!-!sånn
-thus!;!altså!da!-!daværende!-!den gang!-!derfor!-!følgelig!-!på grunn av!-!så!-!således
+thus!;!altså!-!da!-!daværende!-!den gang!-!derfor!-!følgelig!-!på grunn av!-!så!-!således
 roof!;!legge tak!-!tak!-!utvendig tak
 thank!;!takke
 aunt!;!tante
@@ -507,7 +506,7 @@ unknown!;!ukjent
 illegal!;!ulovlig
 accident!;!tilfeldighet!-!ulykke
 immoral!;!umoralsk
-under!;!ned!-!nedre!-!under!-!under-
+under!;!ned!-!nedre!-!under
 signature!;!underskrift!-!undertegning
 young!;!ung
 bachelor!;!ungkar
@@ -517,7 +516,7 @@ miserable!;!dårlig!-!fattig!-!stakkars!-!uheldig!-!ulykkelig
 indecent!;!uanstendig
 extract!;!dra!-!ekstrakt!-!slepe!-!trekke ut
 without!;!uten
-outside!;!unntatt!-!ut!-!ute!-!uten!-!utenfor!-!utenfra!-!utenom!-!utenriks!-!utvendig!-!ytre!-!ytter-!-!ytterside
+outside!;!unntatt!-!ut!-!ute!-!uten!-!utenfor!-!utenfra!-!utenom!-!utenriks!-!utvendig!-!ytre!-!ytterside
 foreign!;!fremmed!-!utenlandsk
 lechery!;!lettsindighet
 emigration	!;!trekk!-!utvandring!-!vandring
@@ -527,7 +526,7 @@ friend!;!venn!-!venninne
 left!;!venstre
 guardian!;!beskytter!-!formynder
 inn!;!herberge!-!kro!-!vertshus
-west!;!vest!-!vest-!-!vestlig!-!vestre
+west!;!vest!-!vestlig!-!vestre
 weaver!;!vever
 rape!;!raps!-!voldta!-!voldtekt
 worthy!;!aktverdig!-!verdig

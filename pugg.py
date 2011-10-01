@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import cProfile
 """
     This program is called Pugg, and is used to learn new languages.
     Copyright (C) 2011  Mattias Ugelvik
@@ -207,7 +206,12 @@ class win:
 
   def showanswer(self,ob): # Does what you would expect
     if self.answerlabel.get_text() == " " or self.answerlabel.get_text() == "Not correct!":
-      text = "<span foreground=\"darkblue\"> or </span>".join(map(capitalize,self.current[self.currentwords[self.index]]))
+      orr = "<span foreground=\"darkblue\"> or </span>"
+      comma = "<span foreground=\"darkblue\">, </span>"
+      text = orr.join([comma.join(map(capitalize,self.current[self.currentwords[self.index]][:-1])),
+                                                self.current[self.currentwords[self.index]][-1].capitalize()])
+      if text.startswith(orr):
+        text = text[len(orr):]
 
       self.answerlabel.set_text(text)
       self.showbutt.set_label("Hide answer")
@@ -278,4 +282,4 @@ class win:
 
 if __name__ == "__main__":
   wind = win()
-  cProfile.run("wind.main()")
+  wind.main()
