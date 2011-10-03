@@ -1,3 +1,7 @@
+	Putt v0.2.2:
+ - Many underlying GUI changes
+ - The button will not hide when the guess is correct, it will become insensitive instead.
+
 	Putt v0.2.1:
  - When you show answers, the answers will be seperated by ", ",
     and the last two will be seperated by " or ".

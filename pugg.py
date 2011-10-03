@@ -31,7 +31,7 @@ class win:
     self.allowscore = 1 # Score will only increase if allowscore is 1, when you show the answer it becomes 0
     self.reset_score_if_false_guess = 0
 
-    self.version = "0.2.1"
+    self.version = "0.2.2"
 
 ##################################################################
                       ## Menu Stuff ##
@@ -98,27 +98,32 @@ class win:
 
     self.nbutt = gtk.Button(label="Next word")
     self.showbutt = gtk.Button(label="Show answer")
+    self.showbutt.set_size_request(332,40)
     self.answerlabel = gtk.Label(" ") # The label to show the answer, and to show wether the answer was correct
     self.answerlabel.set_line_wrap(True)
     self.answerlabel.set_size_request(300,50)
     self.guess = gtk.Entry() # The entry to guess the answer
+    self.guess.set_size_request(250,30)
+
     self.vbox = gtk.VBox()
     self.hbox = gtk.HBox()
-    between = gtk.VSeparator()
-    self.hbox.pack_start(self.guess)
-    self.hbox.pack_start(between,padding=10)
-    self.hbox.pack_start(self.nbutt)
 
-    self.vbox.pack_start(self.word)
-    self.vbox.pack_start(self.hbox,padding=5)
-    self.vbox.pack_start(self.showbutt)
+    entry_nbutt_hbox = gtk.HBox()
+    entry_nbutt_hbox.pack_start(self.guess,padding=5)
+    entry_nbutt_hbox.pack_start(self.nbutt,padding=5)
+    self.hbox.pack_start(entry_nbutt_hbox,1,0)
+
+    showbutthbox = gtk.HBox()
+    showbutthbox.pack_start(self.showbutt,1,0,10)
+
+    self.vbox.pack_start(self.word,0,0,10)
+    self.vbox.pack_start(self.hbox,1,1,padding=10)
+    self.vbox.pack_start(showbutthbox,1,1)
     self.vbox.pack_start(self.answerlabel)
     self.window.set_position(gtk.WIN_POS_CENTER)
     self.window.show()
 
     self.showbutt.connect("clicked", self.showanswer)
-
-    self.between_cb_word = gtk.HSeparator()
 
     self.contentvbox = gtk.VBox()
     self.selecthbox = gtk.HBox()
@@ -127,8 +132,8 @@ class win:
     self.selectlabel.set_markup(markup)
 
     fixed = gtk.Fixed()
-    fixed.put(self.cb, 150,0)
-    fixed.put(self.selectlabel,0,8)
+    fixed.put(self.cb, 150,5)
+    fixed.put(self.selectlabel,5,13)
     self.label = gtk.Label("")
     fixed.put(self.label,0,0)
 
@@ -137,9 +142,7 @@ class win:
     self.contentvbox.pack_start(self.selecthbox)
 
     self.contentvbox.show_all()
-    self.contentvbox.set_border_width(10)
-    self.contentvbox.pack_start(self.between_cb_word,padding=10)
-    self.contentvbox.pack_start(self.vbox)
+    self.contentvbox.pack_start(self.vbox,1,0)
 
 
     vbox.pack_start(self.contentvbox)
@@ -154,6 +157,7 @@ class win:
     vbox.pack_start(self.statusbar,False,True,0)
 
     self.window.add(vbox)
+    self.window.set_size_request(340,300)
     self.window.set_title("Pugg - "+ self.version)
 
     self.nbutt.connect("clicked", self.nextindex)
@@ -174,7 +178,7 @@ class win:
     self.guess.set_text("")
     self.answerlabel.set_text(" ")
     self.showbutt.set_label("Show answer")
-    self.showbutt.show()
+    self.showbutt.set_sensitive(True)
     self.window.set_focus(self.guess)
     if not self.guessed:
       self.setscore(0)
@@ -183,7 +187,7 @@ class win:
 
   def guessword(self,guess): # Does what you would expect
     if guess.get_text().upper() in self.current[self.currentwords[self.index]]: # Guess is correct
-      self.showbutt.hide()
+      self.showbutt.set_sensitive(False)
       markup = "<span foreground='darkgreen'>Correct!</span>"
       self.answerlabel.set_markup(markup)
       self.window.set_focus(self.nbutt)
