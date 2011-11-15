@@ -1,8 +1,14 @@
-	Putt v0.2.2:
- - Many underlying GUI changes
- - The button will not hide when the guess is correct, it will become insensitive instead.
+	Pugg v0.2.3
+ - Shows all possible answers when you guess correctly, 
+    highlighting your guess with green.
+ - Fixed a dict bug.
 
-	Putt v0.2.1:
+	Pugg v0.2.2:
+ - Many underlying GUI changes
+ - The button will not hide when the guess is correct, 
+    it will become insensitive instead.
+
+	Pugg v0.2.1:
  - When you show answers, the answers will be seperated by ", ",
     and the last two will be seperated by " or ".
  - Couple of small bigs fixed.
@@ -10,7 +16,7 @@
  - Some tiny changes.
 
 
-	Putt v0.2:
+	Pugg v0.2:
  - Added score inside a statusbar
  - Changed widget bg colors to normal
  - Both included dictionaries are GREATLY improved
@@ -19,5 +25,5 @@
  - Several small changes
 
 
-	Putt v0.1:
+	Pugg v0.1:
  - First version, no changes.

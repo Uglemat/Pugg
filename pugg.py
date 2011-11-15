@@ -188,13 +188,14 @@ class win:
   def guessword(self,guess): # Does what you would expect
     if guess.get_text().upper() in self.current[self.currentwords[self.index]]: # Guess is correct
       self.showbutt.set_sensitive(False)
-      markup = "<span foreground='darkgreen'>Correct!</span>"
-      self.answerlabel.set_markup(markup)
+      #markup = "<span foreground='darkgreen'>Correct!</span>"
+      #self.answerlabel.set_markup(markup)
+      self.showanswer(0,guess.get_text().capitalize())
       self.window.set_focus(self.nbutt)
       self.setscore(1)
       self.guessed = 1
     else: # Guess is not correct
-      markup = "<span foreground='red'>Not correct!</span>"
+      markup = "<span foreground='red'>Not correct!</span>" # Don't change, will have effect on self.showanswer
       self.answerlabel.set_markup(markup)
       if self.reset_score_if_false_guess:
         self.setscore(0)
@@ -208,19 +209,33 @@ class win:
     self.nextindex(0)
     self.contentvbox.show_all()
 
-  def showanswer(self,ob): # Does what you would expect
+  def capital(self,ize):
+    n = ize.find(">")
+    if n is -1:
+      return ize.capitalize()
+    else:
+      return ize[:n]+ize[n].capitalize()+ize[n+1:]
+
+  def showanswer(self,ob,correctguess=0): # Does what you would expect
     if self.answerlabel.get_text() == " " or self.answerlabel.get_text() == "Not correct!":
       orr = "<span foreground=\"darkblue\"> or </span>"
       comma = "<span foreground=\"darkblue\">, </span>"
-      text = orr.join([comma.join(map(capitalize,self.current[self.currentwords[self.index]][:-1])),
-                                                self.current[self.currentwords[self.index]][-1].capitalize()])
+
+      if correctguess: # If showanswer is called from self.guessword
+        for i in range(len(self.current[self.currentwords[self.index]])):
+          if self.current[self.currentwords[self.index]][i] == correctguess.upper():
+            self.current[self.currentwords[self.index]][i] = "<span foreground=\"darkgreen\"><b>"+self.current[self.currentwords[self.index]][i].capitalize()+"</b></span>"
+      else:
+        self.setscore(0)
+
+      text = orr.join([comma.join(map(self.capital,self.current[self.currentwords[self.index]][:-1])),
+                                  self.capital(self.current[self.currentwords[self.index]][-1])])
       if text.startswith(orr):
         text = text[len(orr):]
 
       self.answerlabel.set_text(text)
       self.showbutt.set_label("Hide answer")
       self.window.set_focus(self.nbutt)
-      self.setscore(0)
     else:
       self.answerlabel.set_text(" ")
       self.showbutt.set_label("Show answer")
