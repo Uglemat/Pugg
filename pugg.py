@@ -31,7 +31,7 @@ class win:
     self.allowscore = 1 # Score will only increase if allowscore is 1, when you show the answer it becomes 0
     self.reset_score_if_false_guess = 0
 
-    self.version = "0.2.2"
+    self.version = "0.2.3"
 
 ##################################################################
                       ## Menu Stuff ##
