@@ -1,3 +1,9 @@
+	Pugg v0.2.4
+ - Did some work on the show answer button. it will no longer
+   change to a "hide answer" button, because when you think
+   about it, that doesn't make any sense.
+ - Fixed a small bug.
+
 	Pugg v0.2.3
  - Shows all possible answers when you guess correctly, 
     highlighting your guess with green.

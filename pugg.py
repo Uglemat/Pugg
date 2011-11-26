@@ -31,7 +31,7 @@ class win:
     self.allowscore = 1 # Score will only increase if allowscore is 1, when you show the answer it becomes 0
     self.reset_score_if_false_guess = 0
 
-    self.version = "0.2.3"
+    self.version = "0.2.4"
 
 ##################################################################
                       ## Menu Stuff ##
@@ -177,7 +177,6 @@ class win:
     self.word.set_markup(markup)
     self.guess.set_text("")
     self.answerlabel.set_text(" ")
-    self.showbutt.set_label("Show answer")
     self.showbutt.set_sensitive(True)
     self.window.set_focus(self.guess)
     if not self.guessed:
@@ -188,14 +187,12 @@ class win:
   def guessword(self,guess): # Does what you would expect
     if guess.get_text().upper() in self.current[self.currentwords[self.index]]: # Guess is correct
       self.showbutt.set_sensitive(False)
-      #markup = "<span foreground='darkgreen'>Correct!</span>"
-      #self.answerlabel.set_markup(markup)
       self.showanswer(0,guess.get_text().capitalize())
       self.window.set_focus(self.nbutt)
       self.setscore(1)
       self.guessed = 1
-    else: # Guess is not correct
-      markup = "<span foreground='red'>Not correct!</span>" # Don't change, will have effect on self.showanswer
+    elif self.showbutt.get_sensitive() != False: # Guess is not correct
+      markup = "<span foreground='red'>Not correct!</span>"
       self.answerlabel.set_markup(markup)
       if self.reset_score_if_false_guess:
         self.setscore(0)
@@ -217,28 +214,24 @@ class win:
       return ize[:n]+ize[n].capitalize()+ize[n+1:]
 
   def showanswer(self,ob,correctguess=0): # Does what you would expect
-    if self.answerlabel.get_text() == " " or self.answerlabel.get_text() == "Not correct!":
-      orr = "<span foreground=\"darkblue\"> or </span>"
-      comma = "<span foreground=\"darkblue\">, </span>"
+    orr = "<span foreground=\"darkblue\"> or </span>"
+    comma = "<span foreground=\"darkblue\">, </span>"
 
-      if correctguess: # If showanswer is called from self.guessword
-        for i in range(len(self.current[self.currentwords[self.index]])):
-          if self.current[self.currentwords[self.index]][i] == correctguess.upper():
-            self.current[self.currentwords[self.index]][i] = "<span foreground=\"darkgreen\"><b>"+self.current[self.currentwords[self.index]][i].capitalize()+"</b></span>"
-      else:
-        self.setscore(0)
-
-      text = orr.join([comma.join(map(self.capital,self.current[self.currentwords[self.index]][:-1])),
-                                  self.capital(self.current[self.currentwords[self.index]][-1])])
-      if text.startswith(orr):
-        text = text[len(orr):]
-
-      self.answerlabel.set_text(text)
-      self.showbutt.set_label("Hide answer")
-      self.window.set_focus(self.nbutt)
+    if correctguess: # If showanswer is called from self.guessword
+      for i in range(len(self.current[self.currentwords[self.index]])):
+        if self.current[self.currentwords[self.index]][i] == correctguess.upper():
+          self.current[self.currentwords[self.index]][i] = "<span foreground=\"darkgreen\"><b>"+self.current[self.currentwords[self.index]][i].capitalize()+"</b></span>"
     else:
-      self.answerlabel.set_text(" ")
-      self.showbutt.set_label("Show answer")
+      self.setscore(0)
+    self.showbutt.set_sensitive(False)
+    text = orr.join([comma.join(map(self.capital,self.current[self.currentwords[self.index]][:-1])),
+                                self.capital(self.current[self.currentwords[self.index]][-1])])
+    if text.startswith(orr):
+      text = text[len(orr):]
+
+    self.answerlabel.set_text(text)
+    self.window.set_focus(self.nbutt)
+
     markup = "<span>" + self.answerlabel.get_text() + "</span>"
     self.answerlabel.set_markup(markup)
 
